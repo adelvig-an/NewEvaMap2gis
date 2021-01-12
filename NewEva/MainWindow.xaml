@@ -1,0 +1,32 @@
+﻿<Window
+    x:Class="NewEva.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NewEva"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="clr-namespace:NewEva.Ui"
+    xmlns:uiflat="clr-namespace:NewEva.Ui.ObjectOfEvaluation.Flat"
+    xmlns:vm="clr-namespace:NewEva.VM"
+    xmlns:vmflat="clr-namespace:NewEva.VM.ObjectOfEvaluation.Flat"
+    Title="MainWindow"
+    Width="1024"
+    Height="600"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:OverviewVM}">
+            <ui:OverviewUi />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:TypeObjectsVM}">
+            <ui:TypeObjectsUC />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmflat:FlatLocationVM}">
+            <uiflat:FlatCalculationUC />
+        </DataTemplate>
+    </Window.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+        <ContentControl Content="{Binding CurrentPage}" />
+
+    </ScrollViewer>
+</Window>

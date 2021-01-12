@@ -1,0 +1,132 @@
+﻿<UserControl
+    x:Class="NewEva.Ui.Customer.PrivatePersonListUC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NewEva.Ui.Customer"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="clr-namespace:NewEva.Ui"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid>
+        <GroupBox BorderThickness="0">
+            <GroupBox.Header>
+                <Grid Width="750" HorizontalAlignment="Center">
+                    <StackPanel
+                        Margin="0,10"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal">
+                        <TextBox
+                            x:Name="txb_Search"
+                            Width="250"
+                            Margin="10,5" />
+                        <Button
+                            x:Name="bt_Search"
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            Content="Найти" />
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <!--  Кнопка Выбрать  -->
+                        <Button
+                            x:Name="bt_Choice"
+                            Width="30"
+                            Margin="5,5"
+                            Content="В" />
+                        <!--  Кнопка Редактировать  -->
+                        <Button
+                            x:Name="bt_Redact"
+                            Width="30"
+                            Margin="5,5"
+                            Command="{Binding DataContext.UpdateSelectedPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                            Content="Р" />
+
+                        <Button
+                            x:Name="bt_Add"
+                            Grid.Column="1"
+                            Margin="5,5"
+                            VerticalAlignment="Center"
+                            Command="{Binding DataContext.NewCustomerPage, RelativeSource={RelativeSource AncestorType={x:Type ui:ContractUi}, Mode=FindAncestor}}"
+                            Content="+ Добавить" />
+                        <!--  Кнопка Удалить  -->
+                        <Button
+                            x:Name="bt_Delete"
+                            Margin="5,5,10,5"
+                            VerticalAlignment="Center"
+                            Command="{Binding DeleteCustomer}"
+                            CommandParameter="{Binding SelectedItems, ElementName=dgPrivatePirsonList}"
+                            Content="Удалить" />
+                    </StackPanel>
+                </Grid>
+            </GroupBox.Header>
+            <DataGrid
+                x:Name="dgPrivatePirsonList"
+                VerticalContentAlignment="Center"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                ItemsSource="{Binding PrivatePersonList}"
+                SelectedItem="{Binding SelectedPrivatePerson}"
+                SelectionMode="Extended"
+                SelectionUnit="FullRow"
+                VerticalScrollBarVisibility="Visible">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding FullName}"
+                        Header="Заказчик"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="100"
+                        Binding="{Binding Serial}"
+                        Header="Серия"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="100"
+                        Binding="{Binding Number}"
+                        Header="Номер"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="100"
+                        Binding="{Binding DateIssued}"
+                        Header="Дата выдачи"
+                        IsReadOnly="True" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <!--  Кнопка Выбрать  -->
+                                    <Button
+                                        x:Name="bt_Choice2"
+                                        Width="25"
+                                        Height="25"
+                                        Margin="5,5"
+                                        Content="В" />
+                                    <!--  Кнопка Редактировать  -->
+                                    <Button
+                                        x:Name="bt_Redact2"
+                                        Width="25"
+                                        Height="25"
+                                        Margin="5,5"
+                                        Command="{Binding DataContext.UpdateSelectedPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                                        Content="Р" />
+                                    <!--  Кнопка Удалить  -->
+                                    <Button
+                                        x:Name="bt_Delete2"
+                                        Width="25"
+                                        Height="25"
+                                        Margin="5,5"
+                                        Command="{Binding DeleteCustomer}"
+                                        CommandParameter="{Binding SelectedItems, ElementName=dgPrivatePirsonList}"
+                                        Content="У" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
+</UserControl>
